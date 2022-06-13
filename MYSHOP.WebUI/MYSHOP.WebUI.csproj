@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +243,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\Create.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -258,6 +263,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MYSHOP.CORE\MYSHOP.CORE.csproj">
+      <Project>{6c1723f4-bf88-4044-9740-871c05e8fbca}</Project>
+      <Name>MYSHOP.CORE</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYSHOP.DataAccess.InMemory\MYSHOP.DataAccess.InMemory.csproj">
+      <Project>{26b309db-941a-48b7-976c-62050ec2601b}</Project>
+      <Name>MYSHOP.DataAccess.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYSHOP.DataAcess.SQL\MYSHOP.DataAcess.SQL.csproj">
+      <Project>{52276dd5-5fe3-4abc-b48d-c22543561087}</Project>
+      <Name>MYSHOP.DataAcess.SQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYSHOP.SERVICES\MYSHOP.SERVICES.csproj">
+      <Project>{f4e6fe40-1aa0-43fe-b8e7-5b0087666f61}</Project>
+      <Name>MYSHOP.SERVICES</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
