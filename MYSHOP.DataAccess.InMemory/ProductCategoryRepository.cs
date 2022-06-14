@@ -42,9 +42,9 @@ namespace MYSHOP.DataAccess.InMemory
                 throw new Exception("product category no found");
             }
         }
-        public ProductCategory Find(string ID)
+        public ProductCategory Find(string Id)
         {
-            ProductCategory productCategory = productcatogries.Find(p => p.Id == ID);
+            ProductCategory productCategory = productcatogries.Find(p => p.Id == Id);
 
             if (productCategory != null)
             {
@@ -60,9 +60,9 @@ namespace MYSHOP.DataAccess.InMemory
         {
             return productcatogries.AsQueryable();
         }
-        public void Delete(string ID)
+        public void Delete(string Id)
         {
-            ProductCategory productCategoryToDelete = productcatogries.Find(p => p.Id == ID);
+            ProductCategory productCategoryToDelete = productcatogries.Find(p => p.Id == Id);
 
             if (productCategoryToDelete != null)
             {

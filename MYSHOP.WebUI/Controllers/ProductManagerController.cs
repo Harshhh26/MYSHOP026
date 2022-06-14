@@ -12,13 +12,13 @@ namespace MYSHOP.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepository context;
-        ProductCategoryRepository productCategories;
+        InMemoryRepository<Product> context;
+        InMemoryRepository<ProductCategory> productCategories;
 
         public ProductManagerController()
         {
-            context = new ProductRepository();
-            productCategories = new ProductCategoryRepository();
+            context = new InMemoryRepository<Product>();
+            productCategories = new InMemoryRepository<ProductCategory>();
         }
 
         // GET: ProductManager
@@ -50,9 +50,9 @@ namespace MYSHOP.WebUI.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Edit(string ID)
+        public ActionResult Edit(string Id)
         {
-            Product product = context.Find(ID);
+            Product product = context.Find(Id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -66,9 +66,9 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(Product product, String ID)
+        public ActionResult Edit(Product product, String Id)
         {
-            Product productToEdit = context.Find(ID);
+            Product productToEdit = context.Find(Id);
 
             if (productToEdit == null)
             {
@@ -92,9 +92,9 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
 
-        public ActionResult Delete(string ID)
+        public ActionResult Delete(string Id)
         {
-            Product productToDelete = context.Find(ID);
+            Product productToDelete = context.Find(Id);
             if (productToDelete  == null)
             {
                 return HttpNotFound();
@@ -106,16 +106,16 @@ namespace MYSHOP.WebUI.Controllers
         }
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string ID)
+        public ActionResult ConfirmDelete(string Id)
         {
-            Product productToDelete = context.Find(ID);
+            Product productToDelete = context.Find(Id);
             if (productToDelete == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                context.Delete(ID);
+                context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("index");            }
         }

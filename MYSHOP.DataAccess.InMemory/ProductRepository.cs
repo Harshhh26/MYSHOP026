@@ -9,7 +9,7 @@ using MYSHOP.CORE.Models;
 
 namespace MYSHOP.DataAccess.InMemory
 {
-   public class ProductRepository
+   public class ProductRepository : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products = new List<Product>();
@@ -32,7 +32,7 @@ namespace MYSHOP.DataAccess.InMemory
         }
         public void Update(Product product)
         {
-            Product productToUpdate = products.Find(p => p.ID == product.ID);
+            Product productToUpdate = products.Find(p => p.Id == product.Id);
 
             if (productToUpdate != null)
             {
@@ -43,9 +43,9 @@ namespace MYSHOP.DataAccess.InMemory
                 throw new Exception("product no found"); 
             }
         }
-        public Product Find(string ID)
+        public Product Find(string Id)
         {
-            Product product = products.Find(p => p.ID == ID);
+            Product product = products.Find(p => p.Id == Id);
 
             if (product != null)
             {
@@ -61,9 +61,9 @@ namespace MYSHOP.DataAccess.InMemory
         {
             return products.AsQueryable();
         }
-        public void Delete(string ID)
+        public void Delete(string Id)
         {
-            Product productToDelete = products.Find(p => p.ID == ID);
+            Product productToDelete = products.Find(p => p.Id == Id);
 
             if (productToDelete != null)
             {
