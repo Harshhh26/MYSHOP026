@@ -53,7 +53,7 @@ namespace MYSHOP.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("product no found");
+                throw new Exception("product category no found");
             }
         }
 
