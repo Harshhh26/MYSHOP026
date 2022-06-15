@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Caching;
 using MYSHOP.CORE.Models;
+using MYSHOP.DataAccess.InMemory;
 
 namespace MYSHOP.DataAccess.InMemory
 {

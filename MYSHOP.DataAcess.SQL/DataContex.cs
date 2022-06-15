@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MYSHOP.DataAcess.SQL
 {
-    public class DataContex : DbContext
+    public class DataContext : DbContext
     {
-        public DataContex()
+        public DataContext()
             : base("DefaultConnection") {
 
         }

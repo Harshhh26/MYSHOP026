@@ -4,18 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MYSHOP.CORE.Models;
-using MYSHOP.DataAccess.InMemory;
+//using MYSHOP.DataAccess.InMemory;
 using MYSHOP.CORE.ViewModels;
 using MYSHOP.CORE.Contracts;
+using MYSHOP.DataAcess.SQL;
 
 namespace MYSHOP.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-        IRepository<Product> context;
-        IRepository<ProductCategory> productCategories;
+        SQLRepository<Product> context;
+        SQLRepository<ProductCategory> productCategories;
 
-        public ProductManagerController(InMemoryRepository<Product> productcontext, IRepository<ProductCategory> productCategorycontext)
+        public ProductManagerController(SQLRepository<Product> productcontext, SQLRepository<ProductCategory> productCategorycontext)
         {
             context = productcontext;
             productCategories = productCategorycontext;
@@ -31,7 +32,7 @@ namespace MYSHOP.WebUI.Controllers
         {
             ProductManagerViewModel ViewModel = new ProductManagerViewModel();
 
-             ViewModel.Product = new Product();
+            ViewModel.Product = new Product();
             ViewModel.productCategories = productCategories.collection();
             return View(ViewModel);
         }

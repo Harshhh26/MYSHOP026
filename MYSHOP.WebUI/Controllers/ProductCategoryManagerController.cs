@@ -1,22 +1,22 @@
 ﻿using MYSHOP.CORE.Models;
-using MYSHOP.DataAccess.InMemory;
+//using MYSHOP.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MYSHOP.CORE.ViewModels;
-
+using MYSHOP.DataAcess.SQL;
 
 namespace MYSHOP.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        InMemoryRepository<ProductCategory> context;
+        SQLRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController()
+        public ProductCategoryManagerController(SQLRepository<ProductCategory> _context)
         {
-            context = new InMemoryRepository<ProductCategory>();
+            context = _context;
         }
 
         // GET: ProductManager

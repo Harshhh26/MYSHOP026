@@ -5,14 +5,14 @@ namespace MYSHOP.DataAcess.SQL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MYSHOP.DataAcess.SQL.DataContex>
+    internal sealed class Configuration : DbMigrationsConfiguration<MYSHOP.DataAcess.SQL.DataContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MYSHOP.DataAcess.SQL.DataContex context)
+        protected override void Seed(MYSHOP.DataAcess.SQL.DataContext context)
         {
             //  This method will be called after migrating to the latest version.
 
