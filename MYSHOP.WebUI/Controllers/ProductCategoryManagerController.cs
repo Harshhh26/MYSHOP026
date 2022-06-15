@@ -6,17 +6,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MYSHOP.CORE.ViewModels;
-using MYSHOP.CORE.Contracts;
+
 
 namespace MYSHOP.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        IRepository<ProductCategory> context; 
+        InMemoryRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController(IRepository<ProductCategory> context)
+        public ProductCategoryManagerController()
         {
-            this.context = context;
+            context = new InMemoryRepository<ProductCategory>();
         }
 
         // GET: ProductManager
@@ -45,9 +45,9 @@ namespace MYSHOP.WebUI.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Edit(string ID)
+        public ActionResult Edit(string Id)
         {
-            ProductCategory productCategory = context.Find(ID);
+            ProductCategory productCategory = context.Find(Id);
             if (productCategory == null)
             {
                 return HttpNotFound();
@@ -58,9 +58,9 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Edit(ProductCategory productCategory, String ID)
+        public ActionResult Edit(ProductCategory productCategory, String Id)
         {
-            ProductCategory productCategoryToEdit = context.Find(ID);
+            ProductCategory productCategoryToEdit = context.Find(Id);
 
             if (productCategoryToEdit == null)
             {
@@ -80,9 +80,9 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
 
-        public ActionResult Delete(string ID)
+        public ActionResult Delete(string Id)
         {
-            ProductCategory productCategoryToDelete = context.Find(ID);
+            ProductCategory productCategoryToDelete = context.Find(Id);
             if (productCategoryToDelete == null)
             {
                 return HttpNotFound();
@@ -94,16 +94,16 @@ namespace MYSHOP.WebUI.Controllers
         }
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string ID)
+        public ActionResult ConfirmDelete(string Id)
         {
-            ProductCategory productCategoryToDelete = context.Find(ID);
+            ProductCategory productCategoryToDelete = context.Find(Id);
             if (productCategoryToDelete == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                context.Delete(ID);
+                context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("index");
             }
