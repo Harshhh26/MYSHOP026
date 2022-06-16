@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using MYSHOP.CORE.Models;
 using System.Threading.Tasks;
 
 namespace MYSHOP.CORE.Models
 {
-   public abstract class BaseEntity
+    public abstract class BaseEntity
     {
         public  string Id{ get; set; }
         public  DateTimeOffset CreatedAt { get; set; }

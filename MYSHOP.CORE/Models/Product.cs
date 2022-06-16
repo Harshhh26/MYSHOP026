@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MYSHOP.CORE.ViewModels;
+using MYSHOP.CORE.Models;
 
 namespace MYSHOP.CORE.Models
 {

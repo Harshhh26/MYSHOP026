@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using MYSHOP.CORE.Models;
 using MYSHOP.CORE.ViewModels;
 using MYSHOP.CORE.Contracts;
 using System.IO;
 using MYSHOP.DataAcess.SQL;
+using MYSHOP.CORE.Models;
+using System.Web.Mvc;
 
 namespace MYSHOP.WebUI.Controllers
 {
