@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using MYSHOP.WebUI.Models;
 
+
 namespace MYSHOP.WebUI
 {
     public class EmailService : IIdentityMessageService

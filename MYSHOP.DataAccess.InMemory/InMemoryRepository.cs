@@ -7,15 +7,16 @@ using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MYSHOP.DataAccess.InMemory
 {
-    public class SQLRepository<T> : IRepository<T> where T : BaseEntity
+    public class InmemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
         string className;
 
-        public SQLRepository()
+        public InmemoryRepository()
         {
             className = typeof(T).Name;
             items = cache[className] as List<T>;

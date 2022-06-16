@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MYSHOP.CORE.Models;
-//using MYSHOP.DataAccess.InMemory;
 using MYSHOP.CORE.ViewModels;
 using MYSHOP.CORE.Contracts;
+using System.IO;
 using MYSHOP.DataAcess.SQL;
 
 namespace MYSHOP.WebUI.Controllers
@@ -32,28 +32,34 @@ namespace MYSHOP.WebUI.Controllers
         {
             ProductManagerViewModel ViewModel = new ProductManagerViewModel();
 
-            ViewModel.Product = new Product();
+             ViewModel.Product = new Product();
             ViewModel.productCategories = productCategories.collection();
             return View(ViewModel);
         }
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid) 
             {
                 return View(product);
-            }
+            }    
             else
             {
+                if (file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("~/Content/ProductImage/") + product.Image);
+                }
+
                 context.Insert(product);
                 context.Commit();
 
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Edit(string ID)
+        public ActionResult Edit(String Id)
         {
-            Product product = context.Find(ID);
+            Product product = context.Find(Id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -64,12 +70,12 @@ namespace MYSHOP.WebUI.Controllers
                 viewModel.Product = product;
                 viewModel.productCategories = productCategories.collection();   
                 return View(viewModel);
-            }
+            } 
         }
         [HttpPost]
-        public ActionResult Edit(Product product, String ID)
+        public ActionResult Edit(Product product, String Id, HttpPostedFileBase file )
         {
-            Product productToEdit = context.Find(ID);
+            Product productToEdit = context.Find(Id);
 
             if (productToEdit == null)
             {
@@ -77,13 +83,19 @@ namespace MYSHOP.WebUI.Controllers
             }
             else
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return View(product);
                 }
+                if (file != null)
+                {
+                    productToEdit.Image = productToEdit.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("~/Content/ProductImage") + productToEdit.Image);
+                }
+
                 productToEdit.Category = product.Category;
+                
                 productToEdit.Depriciation = product.Depriciation;
-                productToEdit.Image = product.Image;
                 productToEdit.Name = product.Name;
                 productToEdit.Price = product.Price;
 
@@ -93,9 +105,9 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
 
-        public ActionResult Delete(string ID)
+        public ActionResult Delete(String Id)
         {
-            Product productToDelete = context.Find(ID);
+            Product productToDelete = context.Find(Id);
             if (productToDelete  == null)
             {
                 return HttpNotFound();
@@ -107,16 +119,16 @@ namespace MYSHOP.WebUI.Controllers
         }
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string ID)
+        public ActionResult ConfirmDelete(String Id)
         {
-            Product productToDelete = context.Find(ID);
+            Product productToDelete = context.Find(Id);
             if (productToDelete == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                context.Delete(ID);
+                context.Delete(Id);
                 context.Commit();
                 return RedirectToAction("index");            }
         }

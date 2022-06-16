@@ -1,20 +1,23 @@
 ﻿using MYSHOP.CORE.Models;
-//using MYSHOP.DataAccess.InMemory;
+using MYSHOP.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MYSHOP.CORE.ViewModels;
 using MYSHOP.DataAcess.SQL;
+using MYSHOP.CORE.Contracts;
+
+
+
 
 namespace MYSHOP.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        SQLRepository<ProductCategory> context;
+        IRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController(SQLRepository<ProductCategory> _context)
+        public ProductCategoryManagerController(IRepository<ProductCategory> _context)
         {
             context = _context;
         }
@@ -45,7 +48,7 @@ namespace MYSHOP.WebUI.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Edit(string Id)
+        public ActionResult Edit(String Id)
         {
             ProductCategory productCategory = context.Find(Id);
             if (productCategory == null)
@@ -68,7 +71,7 @@ namespace MYSHOP.WebUI.Controllers
             }
             else
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     return View(productCategory);
                 }
@@ -80,7 +83,7 @@ namespace MYSHOP.WebUI.Controllers
             }
         }
 
-        public ActionResult Delete(string Id)
+        public ActionResult Delete(String Id)
         {
             ProductCategory productCategoryToDelete = context.Find(Id);
             if (productCategoryToDelete == null)
@@ -94,7 +97,7 @@ namespace MYSHOP.WebUI.Controllers
         }
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string Id)
+        public ActionResult ConfirmDelete(String Id)
         {
             ProductCategory productCategoryToDelete = context.Find(Id);
             if (productCategoryToDelete == null)

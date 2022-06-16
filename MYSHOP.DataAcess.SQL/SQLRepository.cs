@@ -6,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MYSHOP.CORE.ViewModels;
+using MYSHOP.DataAcess.SQL;
 
 namespace MYSHOP.DataAcess.SQL
 {
@@ -27,7 +29,7 @@ namespace MYSHOP.DataAcess.SQL
 
         public void Commit()
         {
-            context.SaveChanges();
+             context.SaveChanges();              
         }
 
         public void Delete(string Id)
