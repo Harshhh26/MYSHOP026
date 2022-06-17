@@ -1,6 +1,7 @@
 ﻿using MYSHOP.CORE.Contracts;
 using MYSHOP.CORE.Models;
 using MYSHOP.CORE.ViewModels;
+using MYSHOP.DataAcess.SQL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
+
 namespace MYSHOP.SERVICES
 {
     public class BasketService : IBasketService
     {
-        IRepository<Product> productContext;
-        IRepository<Basket> basketContext;
+        SQLRepository<Product> productContext;
+        SQLRepository<Basket> basketContext;
 
         public const string BasketSessionName = "eCommerceBasket";
-        public BasketService(IRepository<Product> ProductContext, IRepository<Basket> BasketContext)
+        public BasketService(SQLRepository<Product> ProductContext, SQLRepository<Basket> BasketContext)
         {
             this.basketContext = BasketContext;
             this.productContext = ProductContext;
@@ -25,7 +27,7 @@ namespace MYSHOP.SERVICES
         private Basket GetBasket(HttpContextBase httpContext, bool createIfNull)
         {
             HttpCookie cookie = httpContext.Request.Cookies.Get(BasketSessionName);
-            var basket = new Basket();
+            Basket basket = new Basket();
 
             if (cookie != null)
             {
@@ -58,7 +60,7 @@ namespace MYSHOP.SERVICES
             basketContext.Insert(basket);
             basketContext.Commit();
 
-            HttpCookie cookie = new HttpCookie(BasketSessionName);
+            HttpCookie cookie = new HttpCookie(BasketSessionName); 
             cookie.Value = basket.Id;
             cookie.Expires = DateTime.Now.AddDays(1);
             httpContext.Response.Cookies.Add(cookie);
@@ -70,7 +72,7 @@ namespace MYSHOP.SERVICES
             Basket basket = GetBasket(httpContext, true);
             BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
 
-            if (item == null)
+            if (item==null)
             {
                 item = new BasketItem()
                 {

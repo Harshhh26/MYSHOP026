@@ -9,11 +9,7 @@ using MYSHOP.CORE.Models;
 namespace MYSHOP.CORE.Models
 {
     public class ProductCategory : BaseEntity
-    {
-        
+    { 
         public string Category { get; set; }
-
-        
-
     }
 }

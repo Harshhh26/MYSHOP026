@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MYSHOP.CORE.ViewModels;
 using MYSHOP.CORE.Models;
 
+
 namespace MYSHOP.CORE.Models
 {
     public class Product : BaseEntity

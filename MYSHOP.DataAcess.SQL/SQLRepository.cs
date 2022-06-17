@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MYSHOP.CORE.ViewModels;
-using MYSHOP.DataAcess.SQL;
+
+
 
 namespace MYSHOP.DataAcess.SQL
 {
@@ -50,6 +51,11 @@ namespace MYSHOP.DataAcess.SQL
         {
             dbset.Add(t);
         }
+
+        //public void Insert(T t)
+        //{
+        //    dbset.Add(t);
+        //}
 
         public void Update(T t)
         {
