@@ -13,6 +13,7 @@ using MYSHOP.CORE.Contracts;
 
 namespace MYSHOP.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductCategoryManagerController : Controller
     {
         IRepository<ProductCategory> context;

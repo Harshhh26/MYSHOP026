@@ -11,10 +11,11 @@ using System.Web.Mvc;
 
 namespace MYSHOP.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         SQLRepository<Product> context;
-        SQLRepository<ProductCategory> productCategories;
+        SQLRepository<ProductCategory> productCategories;  
 
         public ProductManagerController(SQLRepository<Product> productcontext, SQLRepository<ProductCategory> productCategorycontext)
         {
