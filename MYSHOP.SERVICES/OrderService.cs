@@ -22,7 +22,7 @@ namespace MYSHOP.SERVICES
         {
             foreach (var item in basketItems)
 
-                BaseOrder.OrderItems.Add(new OrderItem() {
+                BaseOrder.OrderItem.Add(new OrderItem() {
                     ProductId = item.Id,
                     Image = item.Image,
                     Price = item.Price,
@@ -30,6 +30,19 @@ namespace MYSHOP.SERVICES
                     Quanity = item.Quanity,
             });
             Ordercontext.Insert(BaseOrder);
+            Ordercontext.Commit();
+        }
+        public List<Order> GetOrdersList()
+        {
+            return Ordercontext.collection().ToList();
+        }
+        public Order GetOrder(string Id)
+        {
+            return Ordercontext.Find(Id);
+        }
+        public void UpdateOrder(Order updatedorder)
+        {
+            Ordercontext.Update(updatedorder);
             Ordercontext.Commit();
         }
     }

@@ -10,7 +10,7 @@ namespace MYSHOP.CORE.Models
     {
         public Order()
         {
-            this.OrderItems = new List<OrderItem>();     
+            this.OrderItem = new List<OrderItem>();     
         }
         public string Firstname { get; set; }
         public string Surname { get; set; }
@@ -20,7 +20,7 @@ namespace MYSHOP.CORE.Models
         public string State { get; set; }
         public string Zipcode { get; set; }
         public string OrderStatus { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItem { get; set; }
 
 
     }
