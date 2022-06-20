@@ -1,5 +1,6 @@
 ﻿using MYSHOP.CORE.Contracts;
 using MYSHOP.CORE.Models;
+using MYSHOP.DataAcess.SQL;
 using MYSHOP.SERVICES;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,15 @@ namespace MYSHOP.WebUI.Controllers
 {
     public class BasketController : Controller
     {
+        SQLRepository<Customer> Customers;
         IBasketService basketService;
         IorderService OrderService;
 
-        public BasketController(BasketService basketService, IorderService OrderService)
+        public BasketController(BasketService basketService, IorderService OrderService, SQLRepository<Customer> Customers)
         {
             this.basketService = basketService;
             this.OrderService = OrderService;
+            this.Customers = Customers;
         }
         // GET: Basket
         public ActionResult Index()
@@ -41,15 +44,37 @@ namespace MYSHOP.WebUI.Controllers
             return PartialView(basketsummary);
 
         }
+        [Authorize]
         public ActionResult CheckOut()
         {
-            return View();
+            Customer customer = Customers.collection().FirstOrDefault(c=>c.Email == User.Identity.Name);
+            if (customer != null)
+            {
+                Order order = new Order()
+                {
+
+                    Email = customer.Email,
+                    City = customer.City,
+                    State = customer.State,
+                    Street = customer.Street,
+                    Firstname = customer.FirstName,
+                    Surname = customer.LastName,
+                    Zipcode = customer.ZipCode,
+                };
+                return View(order);
+            }
+            else {
+
+                return RedirectToAction("Error");
+            }
         }
         [HttpPost]
+        [Authorize]
         public ActionResult CheckOut(Order order)
         {
             var BasketItem = basketService.GetBasketItem(this.HttpContext);
             order.OrderStatus = "Order Created";
+            order.Email = User.Identity.Name;
 
             //process payment
 
